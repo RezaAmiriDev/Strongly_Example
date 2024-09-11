@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ClassLibrary.Page>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p><a asp-action="Create">Create New</a></p>
+<table>
+    <thead>
+        <tr>
+            <th><span asp-for="Model[0].ImageName"></span></th>
+            <th><span asp-for="Model[0].PageGroup.GroupTitle"></span></th>
+            @* <th><span asp-for="Model[0].Title"></span></th>
+               <th><span asp-for="Model[0].ShortDiscreption"></span></th> *@
+            <th><span asp-for="Model[0].visite"></span></th>
+            <th><span asp-for="Model[0].ShowInSlider"></span></th>
+            <th><span asp-for="Model[0].CreateDate"></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><img src="/PageImage/@item.ImageName" class="thumbnail" style="max-width: 120px" /></td>
+                <td><span>@item.PageGroup.GroupTitle</span></td>
+                <td><span>@item.Title</span></td>
+                <td><span>@item.Text</span></td>
+                <td><span>@item.visite</span></td>
+                <td><span>@item.ShowInSlider</span></td>
+                <td><span>@item.CreateDate</span></td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PageId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PageId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PageId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,67 @@
+﻿@model ClassLibrary.Page
+
+@{
+    ViewData["Title"] = "ShowNews";
+}
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="">خانه</a></li>
+    <li class="breadcrumb-item"><a href="">اخبار</a></li>
+    <li class="breadcrumb-item"><a href="">@Model.PageGroup.GroupTitle</a></li>
+    <li class="breadcrumb-item"><a href="">@Model.Title</a></li>
+</ul>
+
+<section class="single-news border-radius">
+    <header ><h2>@Model.Title</h2><span><i class="fa fa-calendar"></i> انتشار:@Model.CreateDate </span></header>
+  <article>
+      <p>
+          @Model.ShortDiscreption
+      </p>
+      <div ><img src="/PageImages/@Model>ImageName" class="thumbnail" style="max-width: 100%[; margin: 10px auto" /></div>
+      <p>
+          @Model.Text
+      </p>
+  </article>
+</section>
+
+<div class="keywords border-radius">
+   
+  @foreach(var item in Model.Tags.Split(","))
+    {
+        <a href="/Search?q=@item">  @item </a>        
+    }
+</div>
+
+<section class="comment-layer">
+    <header> <i class="fa fa-comments"></i><h5> دیدگاه کاربران </h5><span> @Model.PageComments.Count دیدگاه </span> </header>
+    <ul id="commentList">
+        <a asp-action="ShowComment" asp-controller="News"></a>
+  
+    </ul>
+
+
+    <h6> شما هم دیدگاه خود را ارسال کنید </h6>
+    <form class="comment-form" action="" method="post"> 
+        <div>
+            <input placeholder=" نام و نام خانوادگی" type="text" id="textName">
+            <input placeholder=" ایمیل خود را وارد نمایید " type="email" id="textEmail">
+           @*  <label> <input placeholder=" کد امنیتی  " type="text"> <img src="images/captcha.png"></label> *@
+        </div>
+        <textarea placeholder=" متن دیدگاه" id="textComment"> </textarea>
+        <input value="ثبت دیدگاه ارزشمند شما " type="button" onclick="addComment()">
+    </form>
+</section>
+<script>
+    function addComment()
+    {
+        $ajax({
+            url: "/News/AddComment/" + @Model.PageId,
+            type: "Get",
+            data: { name: $("#textName").val(), email: $("#textEmail").val(), comment: $("#textComment").val() }
+        }).don(function (result) {
+            $("#commentList").html(result);
+            $("#textName").val("");
+            $("#textEmail").val("");
+            $("#textComment").val("");
+            });
+    }
+</script>

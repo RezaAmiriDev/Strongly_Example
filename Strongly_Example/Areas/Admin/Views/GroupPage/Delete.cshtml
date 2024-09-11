@@ -1,0 +1,23 @@
+﻿@model ClassLibrary.GroupPage
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<div>
+<hr />
+
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.GroupTitle)</dt>
+        <dd>@Html.DisplayFor(model => model.GroupTitle)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-action no-color">
+            <input type="submit" name="حذف گروه" value="btn btn-danger" />
+        </div>
+    }
+
+</div>

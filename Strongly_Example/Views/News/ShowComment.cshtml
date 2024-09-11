@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ClassLibrary.PageComment>
+
+    @foreach(var item in Model)
+{
+    <!-- start each comment -->
+    <li>
+        <img src="img/thumb.png">
+        <div>
+            <span>  @item.Name </span>
+            <span> @item.CreateDate   </span>
+        </div>
+         <p>
+             @item.Comment
+         </p>
+    </li>
+    <!-- end each comment -->
+}

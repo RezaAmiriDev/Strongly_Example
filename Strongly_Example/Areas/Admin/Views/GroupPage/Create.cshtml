@@ -1,0 +1,32 @@
+﻿@model ClassLibrary.GroupPage
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_ViewStart.cshtml";
+}
+
+
+
+<ht> Create </ht>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.GroupTitle, htmlAttributes: new { @class = "control-lable col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.GroupTitle, new { htmlAttribute = new { @class = "from-control" } })
+                @Html.ValidationMessageFor(model => model.GroupTitle, " ", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 m-2">
+                <input type="submit" value="ثبت گروه" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+
